@@ -22,6 +22,8 @@ You might want to base your List class on a simplification of the Node class des
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <sstream>
+#include <string>
 using namespace std;
 
 // Linked list node
@@ -103,39 +105,46 @@ int count(int num) {
 	return c;
 }
 
-
 int main()
 {
 	struct node* curr = NULL;
 	struct node* first = NULL;
 	struct node* second = NULL;
 	char charIn = '0';
+	string stringIn = "0";
 	int intIn = 0;
 	int length = 0;
 	int counter = 0;
 
 	// create first list
 	cout << "Enter the first number you would like to add: ";
-	do
-	{
-		cin >> charIn;
-		intIn = charIn - 48;
-		length = count(intIn);
-		cout << "intIn: " << intIn << endl << "charIn: " << charIn << endl << "counter: " << counter << endl;
-		push(&first, intIn);
-		counter++;
-	} while (counter < length + 1); {
+	cin >> stringIn;
 
+		length = stringIn.length();
+		for (int i = 0; i < length; i++)
+		{
+			charIn = stringIn[i];
+			intIn = charIn - 48;
+			counter++;
+			push(&first, intIn);
+		}
 		cout << "First List is ";
 		printList(first);
 
 
 		// create second list
-		do {
-			push(&second, 4);
-			push(&second, 8);
-		} while (false);
-		cout << "Second List is ";
+		cout << "Enter the second number you would like to add: ";
+		cin >> stringIn;
+
+		length = stringIn.length();
+		for (int i = 0; i < length; i++)
+		{
+			charIn = stringIn[i];
+			intIn = charIn - 48;
+			counter++;
+			push(&second, intIn);
+		}
+		cout << "First List is ";
 		printList(second);
 
 		// Add the two lists and see result
@@ -147,4 +156,3 @@ int main()
 
 		return 0;
 	}
-}
