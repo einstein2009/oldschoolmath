@@ -1,15 +1,19 @@
 // Week 2 Written Assignment.cpp : Defines the entry point for the console application.
 
 
-/*Store the digits backwards; that is, store 4 in the first node, 3 in the second node, 2 in the third node, and 1 in the last node.
+/*A singly-linked list can be used to store large integers one digit at a time. For example, the integer 1234 could be stored in a list by storing 1 in the first node,
+2 in the second node, 3 in the third node, and 4 in the last node. However, for this assignment you may find it more useful to store the digits backwards;
+that is, store 4 in the first node, 3 in the second node, 2 in the third node, and 1 in the last node.
 
 Write a program that reads two positive integers that are of arbitrary length and then outputs the sum of the two numbers.
 Your program will read the digits as values of type char so that the number 1234 is read as the four characters '1', '2', '3', and '4'.
 As the characters are read they are changed to values of type int and stored in a list. (Now you can see the first reason why storing the digits “backwards” has an advantage.)
 After the first number has been read your program reads the second number, storing it in a second list.
 
-Your program will perform the addition by implementing the usual paper-and-pencil addition algorithm. (Now you should discover the second reason why storing the digits “backwards” is advantageous.)
-The result of the addition is stored in a list and the result is then written to the screen. Include a loop that allows the user to continue to do more additions until the user says the program should end.
+Your program will perform the addition by implementing the usual paper-and-pencil addition algorithm. 
+(Now you should discover the second reason why storing the digits “backwards” is advantageous.)
+The result of the addition is stored in a list and the result is then written to the screen. 
+Include a loop that allows the user to continue to do more additions until the user says the program should end.
 
 Of course, your multiple precision addition code should be formulated as a function that accepts a pair of lists, returning a list as its result (the sum of the two inputs).
 
@@ -89,43 +93,58 @@ void printList(struct node *node)
 	cout << endl;
 }
 
+int count(int num) {
+
+	int c = 0;
+	while (num != 0) {
+		c++;
+		num /= 10;
+	}
+	return c;
+}
+
+
 int main()
 {
 	struct node* curr = NULL;
 	struct node* first = NULL;
 	struct node* second = NULL;
-	char inChar = '0';
-	int inInt = 0;
+	char charIn = '0';
+	int intIn = 0;
+	int length = 0;
+	int counter = 0;
 
-	
 	// create first list
 	cout << "Enter the first number you would like to add: ";
-
 	do
 	{
-		cin >> inChar;
-		inInt = inChar - 48;
-		cout << inInt << endl;
-		push(&first, inInt);
+		cin >> charIn;
+		intIn = charIn - 48;
+		length = count(intIn);
+		cout << "intIn: " << intIn << endl << "charIn: " << charIn << endl << "counter: " << counter << endl;
+		push(&first, intIn);
+		counter++;
+	} while (counter < length + 1); {
+
 		cout << "First List is ";
 		printList(first);
-	} while (true); 
 
 
-	// create second list
-	do {
-		push(&second, 4);
-		push(&second, 8);
-	} while (false);
-	cout << "Second List is ";
-	printList(second);
+		// create second list
+		do {
+			push(&second, 4);
+			push(&second, 8);
+		} while (false);
+		cout << "Second List is ";
+		printList(second);
 
-	// Add the two lists and see result
-	curr = addTwoLists(first, second);
-	cout << "Current list is ";
-	printList(curr);
+		// Add the two lists and see result
+		curr = addTwoLists(first, second);
+		cout << "Current list is ";
+		printList(curr);
 
-	system("PAUSE");
+		system("PAUSE");
 
-	return 0;
+		return 0;
+	}
 }
