@@ -95,16 +95,6 @@ void printList(struct node *node)
 	cout << endl;
 }
 
-int count(int num) {
-
-	int c = 0;
-	while (num != 0) {
-		c++;
-		num /= 10;
-	}
-	return c;
-}
-
 int main()
 {
 	struct node* curr = NULL;
@@ -116,9 +106,13 @@ int main()
 	int length = 0;
 	int counter = 0;
 
-	// create first list
-	cout << "Enter the first number you would like to add: ";
-	cin >> stringIn;
+	do
+	{
+		charIn = '0';
+
+		// create first list
+		cout << "Enter the first number you would like to add: ";
+		cin >> stringIn;
 
 		length = stringIn.length();
 		for (int i = 0; i < length; i++)
@@ -133,6 +127,7 @@ int main()
 
 
 		// create second list
+		stringIn = "0";
 		cout << "Enter the second number you would like to add: ";
 		cin >> stringIn;
 
@@ -144,7 +139,7 @@ int main()
 			counter++;
 			push(&second, intIn);
 		}
-		cout << "First List is ";
+		cout << "second List is ";
 		printList(second);
 
 		// Add the two lists and see result
@@ -152,7 +147,16 @@ int main()
 		cout << "Current list is ";
 		printList(curr);
 
-		system("PAUSE");
+		cout << "Would you like to do more addition? (type N/n to exit)" << endl;
+		cin >> charIn;
+		curr = NULL;
+		first = NULL;
+		second = NULL;
+		stringIn = "0";
+		intIn = 0;
+		length = 0;
+		counter = 0;
+	} while (charIn != 'n' || charIn != 'N');
 
 		return 0;
 	}
